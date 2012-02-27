@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conference Manager</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<%= render :partial => "layouts/user_nav" %>
+
+<% if session[:user_id] and User.find(session[:user_id]).admin %>
+	<%= render :partial => "layouts/admin_nav" %>
+<% end %>
+
+<% if flash[:notice] %>
+	<div class="flash success">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+<% if flash[:error] %>
+	<div class="flash failure">
+		<%= flash[:error] %>
+	</div>
+<% end %>
+
+<body>
+
+<%= yield %>
+
+</body>
+</html>

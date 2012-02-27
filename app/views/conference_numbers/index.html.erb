@@ -1,0 +1,23 @@
+<h1>Listing conference_numbers</h1>
+
+<table>
+  <tr>
+    <th>Conference number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @conference_numbers.each do |conference_number| %>
+  <tr>
+    <td><%= conference_number.conference_number %></td>
+    <td><%= link_to 'Show', conference_number %></td>
+    <td><%= link_to 'Edit', edit_conference_number_path(conference_number) %></td>
+    <td><%= link_to 'Destroy', conference_number, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Conference number', new_conference_number_path %>

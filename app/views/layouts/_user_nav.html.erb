@@ -1,0 +1,20 @@
+<% if session[:user_id] %>
+	<!-- Navigation -->
+	<div class = "user_nav">
+		<%= link_to "New Booking", :controller => :bookings, :action => :new %> |
+		<%= link_to "View Bookings", bookings_path %> |
+			
+		<%= link_to "Conference Numbers", conference_numbers_path %> | 
+		
+		<span class = "user_nav_right">
+			Welcome <%= User.find(session[:user_id]).first_name %>			
+			[<%= link_to "Update My Profile", edit_user_path(User.find(session[:user_id])) %>]
+			[<%= link_to "Logout", logout_url %>]
+		</span>
+	</div>	
+<% else %>
+	<div class = "user_nav"> 
+		<%= link_to "Register", :controller => :users, :action => :new %> |
+		<%= link_to "Login", login_url %>
+	</div>
+<% end %>

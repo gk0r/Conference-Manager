@@ -1,0 +1,39 @@
+<!-- Useful links
+Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
+
+<h1>Listing bookings</h1>
+
+<table>
+  <tr>
+    <th>Conference number</th>
+    <th>User</th>
+    <th>Date</th>
+    <th>Time start</th>
+    <th>Time finish</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bookings.each do |booking| %>
+  <tr>
+    <td><%= booking.conference_number.conference_number %></td>
+    <td><%= booking.user.first_name %> <%=booking.user.last_name %></td>    
+   
+    <td><%= booking.date.strftime("%d/%m/%Y") %></td>
+    <td><%= booking.time_start.strftime("%I:%M%p") %></td>
+    <td><%= booking.time_finish.strftime("%I:%M%p") %></td>
+    <td><%= link_to 'Show', booking %></td>
+    <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+    <td><%= link_to 'Destroy', booking, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Booking', new_booking_path %>
+
+
+
+

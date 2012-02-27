@@ -1,0 +1,48 @@
+<%= form_for(@booking) do |f| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+      <ul>
+      <% @booking.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date, :order => [:day, :month, :year], :start_year => Time.now.year %>
+  </div>
+  <div class="field">
+    <%= f.label :time_start %><br />
+    <%= f.time_select :time_start, :minute_step => 15, :ampm => true, :default => (Time.now + 1.hours) %>
+  </div>
+  <div class="field">
+    <%= f.label :time_finish %><br />
+    <%= f.time_select :time_finish, :minute_step => 15, :ampm => true, :default => (Time.now + 2.hours) %>
+  </div>
+  
+<!-- <%= %> button_to "Check Availability", booking_path, remote: true %> -->
+
+	<% if @ready_to_book %>
+  		<div class="field">
+   			<%= f.label :conference_number_id %><br />
+			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, :prompt => true %>
+  		</div>
+  
+  		<div class="actions">
+    		<%= f.submit "Book", :disable_with => "Booking..."%>
+  		</div>  
+	<% else %>
+  		<div class="actions">
+    		<%= f.submit "Check Availability", :disable_with => "Checking..." %>
+ 		</div>    
+  	<% end %>
+  
+<% end %>
+
+
+
+<%= debug (@booking)%>
+<%= debug (@counter)%>
