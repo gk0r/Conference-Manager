@@ -1,29 +1,39 @@
-<p>
-  <b>Conference number:</b>
-  <%= @booking.conference_number_id %>
-</p>
+<h1>View Booking</h1>
 
-<p>
-  <b>User:</b>
-  <%= @booking.user_id %>
-</p>
+<table class="view">
+	<tr>
+		<td class="heading">Conference Number:</td>		
+		<td>
+			<%= ConferenceNumber.find(@booking.conference_number_id).conference_number %>
+		</td>
+	</tr>
+	<tr>
+		<td class="heading">User:</td>
+		<td>
+			<%= User.find(@booking.user_id).first_name %>
+			<%= User.find(@booking.user_id).last_name %>
+		</td>
+	</tr>
+	<tr>
+		<td class="heading">Date:</td>
+		<td>
+			<%= @booking.date %>
+		</td>
+	</tr>	
+	<tr>
+		<td class="heading">Time Start:</td>
+		<td>
+			<%= @booking.time_start.strftime("%I:%M%p") %>
+		</td>
+	</tr>
+	<tr>
+		<td class="heading">Time Finish:</td>
+		<td>
+			<%= @booking.time_finish.strftime("%I:%M%p") %>			</td>
+	</tr>
+</table>
 
-<p>
-  <b>Date:</b>
-  <%= @booking.date %>
-</p>
-
-<p>
-  <b>Time start:</b>
-  <%= @booking.time_start %>
-</p>
-
-<p>
-  <b>Time finish:</b>
-  <%= @booking.time_finish %>
-</p>
-
-
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to 'Edit this booking', edit_booking_path(@booking), :class => "regular"%> |
 <%= link_to 'Return to Bookings', bookings_path %>
+
 

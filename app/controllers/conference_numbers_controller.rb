@@ -60,7 +60,7 @@ class ConferenceNumbersController < ApplicationController
 
     respond_to do |format|
       if @conference_number.update_attributes(params[:conference_number])
-        format.html { redirect_to @conference_number, notice: 'Conference number was successfully updated.' }
+        format.html { redirect_to conference_numbers_path, notice: "Conference number #{@conference_number.conference_number} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

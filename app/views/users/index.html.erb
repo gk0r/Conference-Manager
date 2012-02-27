@@ -1,6 +1,6 @@
 <h1>Listing users</h1>
 
-<table>
+<table class="view">
   <tr>
     <th>Logon</th>
     <th>First name</th>
@@ -8,31 +8,51 @@
     <th>Spectrum number</th>
     <% if session[:user_id] and User.find(session[:user_id]).admin %>
     	<th>Password</th>
-    	<th>Admin</th>
+    	<th>Admin</th>	
+   		<th></th>
+    	<th></th>
 	<% end %>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.logon %></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
-    <td><%= user.spectrum_number %></td>
+    <td class="view">
+    	<%= user.logon %>
+    </td>
+    <td class="view">
+    	<%= user.first_name %>
+    </td>
+    <td class="view">
+    	<%= user.last_name %>
+    </td>
+    <td class="view">
+    	<%= user.spectrum_number %>
+    </td>
     
     <% if session[:user_id] and User.find(session[:user_id]).admin %>
-    	<td><%= user.password %></td>
-   		<td><%= user.admin %></td>
+    	<td class="view">
+    		<%= user.password %>
+    	</td>
+   		<td class="view">
+   			<%= user.admin %>
+   		</td>
   
-	    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    	<td><%= link_to 'Delete', user, confirm: 'Are you sure?', method: :delete %></td>
+   	<td class="view">
+    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit"),  
+    		edit_user_path(user)  %>
+    </td>
+    		
+    <td class="view">
+    	<%= link_to image_tag("cross.png", :alt => "Delete"), 
+    		user,
+    		confirm: "Are you sure you want to delete #{user.first_name}?", 
+    		method: :delete %>
+    </td>
+    	
+    	
     <% end %>
     
-    <% if user.id == session[:user_id]%>
-    	<td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <% end %>
+
   </tr>
 <% end %>
 </table>

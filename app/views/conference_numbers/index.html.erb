@@ -1,23 +1,24 @@
-<h1>Listing conference_numbers</h1>
+<h1>Conference Numbers</h1>
 
-<table>
-  <tr>
-    <th>Conference number</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table class="view">
 <% @conference_numbers.each do |conference_number| %>
   <tr>
-    <td><%= conference_number.conference_number %></td>
-    <td><%= link_to 'Show', conference_number %></td>
-    <td><%= link_to 'Edit', edit_conference_number_path(conference_number) %></td>
-    <td><%= link_to 'Destroy', conference_number, confirm: 'Are you sure?', method: :delete %></td>
+    <td class="heading"><%= conference_number.conference_number %></td>
+    <td>
+    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit"),  
+    		edit_conference_number_path(conference_number) %>
+    </td>
+    		
+    <td>
+    	<%= link_to image_tag("cross.png", :alt => "Delete"), 
+    		conference_number, 
+    		confirm: "Are you sure you want to delete #{conference_number.conference_number}?", 
+    		method: :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Conference number', new_conference_number_path %>
+<%= link_to 'New Conference Number', new_conference_number_path %>

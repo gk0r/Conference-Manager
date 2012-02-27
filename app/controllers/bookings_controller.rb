@@ -140,7 +140,7 @@ class BookingsController < ApplicationController
   
   def test1
     @booking = Booking.find("1")
-       
+ 
     respond_to do |format|
       format.html { render action: "test1" }
       format.js      

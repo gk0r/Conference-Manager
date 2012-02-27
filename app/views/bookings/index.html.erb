@@ -1,9 +1,9 @@
 <!-- Useful links
 Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
 
-<h1>Listing bookings</h1>
+<h1>View Bookings</h1>
 
-<table>
+<table class="view">
   <tr>
     <th>Conference number</th>
     <th>User</th>
@@ -12,23 +12,44 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
     <th>Time finish</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @bookings.each do |booking| %>
   <tr>
-    <td><%= booking.conference_number.conference_number %></td>
-    <td><%= booking.user.first_name %> <%=booking.user.last_name %></td>    
+    <td class="view">
+    	<%= booking.conference_number.conference_number %>
+    </td>
+    <td class="view">
+    	<%= booking.user.first_name %> <%=booking.user.last_name %>
+    </td>    
    
-    <td><%= booking.date.strftime("%d/%m/%Y") %></td>
-    <td><%= booking.time_start.strftime("%I:%M%p") %></td>
-    <td><%= booking.time_finish.strftime("%I:%M%p") %></td>
-    <td><%= link_to 'Show', booking %></td>
-    <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-    <td><%= link_to 'Destroy', booking, confirm: 'Are you sure?', method: :delete %></td>
+    <td class="view">
+    	<%= booking.date.strftime("%d/%m/%Y") %>
+    </td>
+    <td class="view">
+    	<%= booking.time_start.strftime("%I:%M%p") %>
+    </td>
+    <td class="view">
+    	<%= booking.time_finish.strftime("%I:%M%p") %>
+    </td>
+    
+    <td class="view">
+    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit"),  
+    		edit_booking_path(booking) %>
+    </td>
+    		
+    <td class="view">
+    	<%= link_to image_tag("cross.png", :alt => "Delete"), 
+    		booking,
+    		confirm: "Are you sure you want to delete this booking?", 
+    		method: :delete %>
+    </td>
+    
   </tr>
 <% end %>
 </table>
+
+<p> <%= will_paginate @orders %></p>
 
 <br />
 
