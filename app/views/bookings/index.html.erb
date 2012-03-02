@@ -8,8 +8,8 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
     <th>Conference number</th>
     <th>User</th>
     <th>Date</th>
-    <th>Time start</th>
-    <th>Time finish</th>
+    <th>Start Time</th>
+    <th>Finish Time</th>
     <th></th>
     <th></th>
   </tr>
@@ -33,28 +33,24 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
     	<%= booking.time_finish.strftime("%I:%M%p") %>
     </td>
     
-    <td class="view">
-    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit"),  
-    		edit_booking_path(booking) %>
-    </td>
+    <td class="view"> <div class="buttons">	
+    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
+    		edit_booking_path(booking), :class => "regular" %>
+    </td> </div> 
     		
-    <td class="view">
-    	<%= link_to image_tag("cross.png", :alt => "Delete"), 
-    		booking,
+    <td class="view"> <div class="buttons">	
+    	<%= link_to image_tag("cross.png", :alt => "Delete") + "Delete", 
+    		booking, :class => "negative",
     		confirm: "Are you sure you want to delete this booking?", 
     		method: :delete %>
-    </td>
+    </td> </div> 
     
   </tr>
 <% end %>
 </table>
 
-<p> <%= will_paginate @orders %></p>
+<%= will_paginate @orders %>
 
-<br />
-
-<%= link_to 'New Booking', new_booking_path %>
-
-
-
-
+<div class="buttons">
+	<%= link_to image_tag("add.png") + " New Booking", new_booking_path, :class => "positive" %>
+</div>

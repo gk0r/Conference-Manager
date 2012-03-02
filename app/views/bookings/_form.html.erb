@@ -31,18 +31,9 @@
 			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, :prompt => true %>
   		</div>
   
-  		<div class="actions">
-    		<%= f.submit "Book", :disable_with => "Booking..."%>
-  		</div>  
-	<% else %>
-  		<div class="actions">
-    		<%= f.submit "Check Availability", :disable_with => "Checking..." %>
- 		</div>    
+		<%= add_button("Book", "add.png", "positive") %> 
+	<% else %>		
+ 		<%= add_button("Check Availability", "zoom.png", "positive") %> 		
   	<% end %>
   
 <% end %>
-
-
-
-<%= debug (@booking)%>
-<%= debug (@counter)%>

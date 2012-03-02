@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   
   # GET /users
   def index
-    @users = User.all
+     @users = User.paginate page: params[:page], 
+      order: 'first_name asc',
+      per_page: paginate_at()       
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,11 +32,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    # if session[:user_id] == User.find(params[:id])
-      # return
-    # end
-    # @user = User.find(params[:id])
-    
+  
     if User.find(session[:user_id]).admin
       @user = User.find(params[:id])
     else
@@ -50,8 +48,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Registration successful.' }
-        session[:user_id] = @user.id
+        format.html { redirect_to users_path, notice: 'Registration successful.' }
+        # This is for a new User who has not registered before, and does not have
+        # a current session. Users who have already authenticated will not be automatically
+        # logged in as the newly created user.
+        if session[:user_id] == nil
+          session[:user_id] = @user.id
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

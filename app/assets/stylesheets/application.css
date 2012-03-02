@@ -12,10 +12,9 @@
  *= require_tree .
 */
 
-.admin_nav {
+.admin_nav {  
   background: orange;
-  padding: 5px;
-  width: 600px;	
+  padding: 5px;  	
   margin: 5px;
   word-spacing:30px;
  
@@ -30,7 +29,6 @@
 	padding: 5px;
 	margin: 5px;
 	color: white;
-
 }
 
 .success {	
@@ -56,5 +54,13 @@ th {
 .heading {
 	text-align: right;
 	font-weight: bold;
+}
+
+.pagination {
+	text-align: center;
+}
+
+.centre {
+	text-align: center;
 }
 

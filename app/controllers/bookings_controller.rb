@@ -1,10 +1,11 @@
 class BookingsController < ApplicationController
   # GET /bookings
   def index
+       
     @bookings = Booking.where("date > ?", 
      Date.yesterday()).paginate page: params[:page], 
       order: 'created_at asc',
-      per_page: 15
+      per_page: paginate_at()
         
     respond_to do |format|
       format.html # index.html.erb

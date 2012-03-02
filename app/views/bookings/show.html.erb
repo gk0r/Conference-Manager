@@ -33,7 +33,12 @@
 	</tr>
 </table>
 
-<%= link_to 'Edit this booking', edit_booking_path(@booking), :class => "regular"%> |
-<%= link_to 'Return to Bookings', bookings_path %>
+<div class="buttons">
+	<%= link_to image_tag("textfield_rename.png") + "Edit This Booking", 
+		edit_booking_path(@booking), :class => "positive" %>
+		
+	<%= link_to image_tag("arrow_left.png") + "Back to Bookings", 
+		bookings_path, :class => "regular" %>		
+</div>
 
 

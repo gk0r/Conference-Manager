@@ -1,11 +1,11 @@
-<h1>Listing users</h1>
+<h1>User List</h1>
 
 <table class="view">
   <tr>
     <th>Logon</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Spectrum number</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Spectrum Number</th>
     <% if session[:user_id] and User.find(session[:user_id]).admin %>
     	<th>Password</th>
     	<th>Admin</th>	
@@ -33,32 +33,37 @@
     	<td class="view">
     		<%= user.password %>
     	</td>
-   		<td class="view">
-   			<%= user.admin %>
+   		<td class="view centre">
+   			<%= image_tag("apply.png") if user.admin %>
    		</td>
-  
-   	<td class="view">
-    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit"),  
-    		edit_user_path(user)  %>
-    </td>
+  	
+  	
+   		<td class="view"> <div class="buttons">		
+    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
+    		edit_user_path(user), :class => "regular"  %>
+   	 	</td> </div>  
     		
-    <td class="view">
-    	<%= link_to image_tag("cross.png", :alt => "Delete"), 
-    		user,
+   	 	<td class="view"> <div class="buttons">		
+    	<%= link_to image_tag("cross.png", :alt => "Delete") + "Delete", 
+    		user, :class => "negative",
     		confirm: "Are you sure you want to delete #{user.first_name}?", 
-    		method: :delete %>
-    </td>
-    	
-    	
+    		method: :delete 
+    		%>
+   	 	</td> </div>      	
     <% end %>
-    
-
   </tr>
 <% end %>
 </table>
 
+<%= will_paginate @users %>
+
 <br />
 
 <% if session[:user_id] and User.find(session[:user_id]).admin %>
-	<%= link_to 'New User', new_user_path %>
+	
+	<div class="buttons">
+		<%= link_to image_tag("add.png") + "New User", 
+			new_user_path, :class => "positive" %>
+	</div>
+	
 <% end %>
