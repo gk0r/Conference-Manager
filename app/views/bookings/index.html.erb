@@ -3,7 +3,7 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
 
 <h1>View Bookings</h1>
 
-<table class="view">
+<table>
   <tr>
     <th>Conference number</th>
     <th>User</th>
@@ -16,29 +16,29 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
 
 <% @bookings.each do |booking| %>
   <tr>
-    <td class="view">
+    <td>
     	<%= booking.conference_number.conference_number %>
     </td>
-    <td class="view">
+    <td>
     	<%= booking.user.first_name %> <%=booking.user.last_name %>
     </td>    
    
-    <td class="view">
+    <td>
     	<%= booking.date.strftime("%d/%m/%Y") %>
     </td>
-    <td class="view">
+    <td>
     	<%= booking.time_start.strftime("%I:%M%p") %>
     </td>
-    <td class="view">
+    <td>
     	<%= booking.time_finish.strftime("%I:%M%p") %>
     </td>
     
-    <td class="view"> <div class="buttons">	
+    <td> <div class="buttons">	
     	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
     		edit_booking_path(booking), :class => "regular" %>
     </td> </div> 
     		
-    <td class="view"> <div class="buttons">	
+    <td> <div class="buttons">	
     	<%= link_to image_tag("cross.png", :alt => "Delete") + "Delete", 
     		booking, :class => "negative",
     		confirm: "Are you sure you want to delete this booking?", 

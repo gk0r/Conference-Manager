@@ -1,0 +1,19 @@
+table {
+  // border: 1px solid; // For debugging purposes
+  padding-left: 3px;
+
+  th {
+    text-align: left;
+    @extend table;
+  }
+
+  tr {
+    @extend table;
+  }
+
+  td {
+     @extend table;
+  }
+}
+
+

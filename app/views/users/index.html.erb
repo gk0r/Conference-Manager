@@ -1,6 +1,6 @@
 <h1>User List</h1>
 
-<table class="view">
+<table>
   <tr>
     <th>Logon</th>
     <th>First Name</th>
@@ -16,34 +16,33 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td class="view">
+    <td>
     	<%= user.logon %>
     </td>
-    <td class="view">
+    <td>
     	<%= user.first_name %>
     </td>
-    <td class="view">
+    <td>
     	<%= user.last_name %>
     </td>
-    <td class="view">
+    <td>
     	<%= user.spectrum_number %>
     </td>
     
     <% if session[:user_id] and User.find(session[:user_id]).admin %>
-    	<td class="view">
+    	<td class="centre">
     		<%= user.password %>
     	</td>
-   		<td class="view centre">
+   		<td class="centre">
    			<%= image_tag("apply.png") if user.admin %>
    		</td>
-  	
-  	
-   		<td class="view"> <div class="buttons">		
+  	  	
+   		<td> <div class="buttons">		
     	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
     		edit_user_path(user), :class => "regular"  %>
    	 	</td> </div>  
     		
-   	 	<td class="view"> <div class="buttons">		
+   	 	<td> <div class="buttons">		
     	<%= link_to image_tag("cross.png", :alt => "Delete") + "Delete", 
     		user, :class => "negative",
     		confirm: "Are you sure you want to delete #{user.first_name}?", 
@@ -56,8 +55,6 @@
 </table>
 
 <%= will_paginate @users %>
-
-<br />
 
 <% if session[:user_id] and User.find(session[:user_id]).admin %>
 	

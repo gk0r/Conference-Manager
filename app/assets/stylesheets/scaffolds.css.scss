@@ -9,9 +9,9 @@ body {
   height:500px; 
   width:800px; 
   
-  border-color:maroon; 
-  border-style:solid; 
-  border-width:1px;
+  border-color: #313D52; 
+  border-style: solid; 
+  border-width: 2px;
 }
 
 p, ol, ul, td {
@@ -23,13 +23,6 @@ pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px; }
-
-// a {
-  // color: #000;
-  // &:visited {
-    // color: #666; }
-  // &:hover {    
-    // background-color: white; } }
 
 div {
   &.field, &.actions {

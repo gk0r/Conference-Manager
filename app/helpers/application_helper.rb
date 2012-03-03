@@ -8,9 +8,5 @@ module ApplicationHelper
     render :file  => "./layouts/buttons"
   end  
   
-  def retrieve_available_conference_numbers ()
-    
-  end
-  
 end
 

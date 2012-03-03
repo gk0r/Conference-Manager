@@ -32,7 +32,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
-    @booking = Booking.find(params[:id])
+    @booking = Booking.find(params[:id])        
+    get_available_conference_numbers()
   end
 
   # POST /bookings
@@ -40,7 +41,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(params[:booking])
     @booking.user_id = session[:user_id]
     
-    @conference_numbers = ConferenceNumber.find_by_sql(["SELECT id, conference_number FROM conference_numbers WHERE id NOT IN (SELECT conference_numbers.id FROM conference_numbers INNER JOIN bookings ON conference_numbers.id=bookings.conference_number_id WHERE bookings.date == ? AND (bookings.time_start BETWEEN ? AND ?) OR (bookings.time_finish BETWEEN ? AND ?))", @booking.date, @booking.time_start, @booking.time_finish, @booking.time_start, @booking.time_finish])
+    get_available_conference_numbers()
   
     respond_to do |format|
       if @booking.conference_number_id == nil
@@ -152,6 +153,10 @@ class BookingsController < ApplicationController
     respond_to do |format|
       format.html { render action: "test2" }
     end    
+  end
+  
+  def get_available_conference_numbers()
+    @conference_numbers = ConferenceNumber.find_by_sql(["SELECT id, conference_number FROM conference_numbers WHERE id NOT IN (SELECT conference_numbers.id FROM conference_numbers INNER JOIN bookings ON conference_numbers.id=bookings.conference_number_id WHERE bookings.date == ? AND (bookings.time_start BETWEEN ? AND ?) OR (bookings.time_finish BETWEEN ? AND ?))", @booking.date, @booking.time_start, @booking.time_finish, @booking.time_start, @booking.time_finish])
   end
   
 end

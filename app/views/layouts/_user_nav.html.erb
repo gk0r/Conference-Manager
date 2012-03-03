@@ -1,20 +1,30 @@
+<div class="banner">Conference Manager</div>
+<div class = "nav">
 <% if session[:user_id] %>
-	<!-- Navigation -->
-	<div class = "user_nav">
-		<%= link_to "New Booking", :controller => :bookings, :action => :new %> |
-		<%= link_to "View Bookings", bookings_path %> |
-			
-		<%= link_to "Conference Numbers", conference_numbers_path %> | 
+	<!-- Navigation Logged-In -->
+
+<!-- 		Navigation Left -->
+		<ul class="nav_left">
+			<li> <%= link_to "New Booking", :controller => :bookings, :action => :new %> </li>
+			<li> <%= link_to "View Bookings", bookings_path %></li>				
+			<li> <%= link_to "Conference Numbers", conference_numbers_path %> </li>
+		</ul>
 		
-		<div class = "user_nav_right">
-			Welcome <%= User.find(session[:user_id]).first_name %>			
-			[<%= link_to "Update My Profile", edit_user_path(User.find(session[:user_id])) %>]
-			[<%= link_to "Logout", logout_url %>]
-		</div>
-	</div>	
+<!-- 		Navigation Right -->
+		<ul class="nav_right">		
+			 <!-- Welcome --> <%= 
+				# User.find(session[:user_id]).first_name 
+			%>			
+			<li><%= link_to "Update My Profile", edit_user_path(User.find(session[:user_id])) %> </li>
+			<li> <%= link_to "Logout", logout_url %> </li>	
+		</ul>
+		
 <% else %>
-	<div class = "user_nav"> 
-		<%= link_to "Register", :controller => :users, :action => :new %> |
-		<%= link_to "Login", login_url %>
-	</div>
+
+<!-- Navigation Unregistered -->
+	<ul class="nav_right">
+		<li> <%= link_to "Register", :controller => :users, :action => :new %> </li>	
+		<li> <%= link_to "Login", login_url %> </li>	
+	</ul>
 <% end %>
+</div>

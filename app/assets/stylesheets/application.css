@@ -1,77 +1,41 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
  *= require_self
  *= require_tree .
 */
 
-.admin_nav {  
-  background: orange;
-  padding: 5px;  	
-  margin: 5px;
-  word-spacing:30px;
- 
-}
-
-.user_nav {
-	height: 40px;
-	background: #333;	
-	color: #ccc;
-	vertical-align: bottom;
-	
-	#user_nav a {
-		text-decoration: none;
-	}
-}
-
-.user_nav_right {
-	float: right
-}
-
 .flash {
-	width: 600px;	
+	clear: both;
 	padding: 5px;
 	margin: 5px;
 	color: white;
 }
 
 .success {	
+	clear: both;
 	background: green;	
 }
 
 .failure {	
+	clear: both;
 	background: red;
 }
 
-/*Tables*/
-.view {
-	padding: 0px 5px;;
-	margin: 0px 5px;;
-}
-
-th {
-	padding: 0px 5px;
-	margin: 0px 5px;
-	text-align: left;
-}
-
-.heading {
-	text-align: right;
-	font-weight: bold;
-}
-
 .pagination {
-	text-align: center;
+	text-align: center;	
 }
+
+.previous_page {color: black;}
 
 .centre {
 	text-align: center;
 }
 
+.main {
+  clear: both;
+  margin: 10px 5px;
+}
+
+h1 {
+	color: #1159CF;
+	font-size: 1.5em;
+}

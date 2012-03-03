@@ -1,9 +1,9 @@
 <h1>Conference Numbers</h1>
 
-<table class="view">
+<table>
 <% @conference_numbers.each do |conference_number| %>
   <tr>
-    <td class="heading"><%= conference_number.conference_number %></td>
+    <td><%= conference_number.conference_number %></td>
     <td> <div class="buttons">	
     	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
     		edit_conference_number_path(conference_number), :class => "regular"  %>

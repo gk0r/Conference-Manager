@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   #   This is a "Global" method that returns the number of entries for the Pagination
   #   plugin. 
   def paginate_at ()
-    return 9
+    return 8
   end
   
 end
