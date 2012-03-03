@@ -6,11 +6,11 @@
 			
 		<%= link_to "Conference Numbers", conference_numbers_path %> | 
 		
-		<span class = "user_nav_right">
+		<div class = "user_nav_right">
 			Welcome <%= User.find(session[:user_id]).first_name %>			
 			[<%= link_to "Update My Profile", edit_user_path(User.find(session[:user_id])) %>]
 			[<%= link_to "Logout", logout_url %>]
-		</span>
+		</div>
 	</div>	
 <% else %>
 	<div class = "user_nav"> 

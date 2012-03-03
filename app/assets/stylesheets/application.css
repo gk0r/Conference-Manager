@@ -20,6 +20,17 @@
  
 }
 
+.user_nav {
+	height: 40px;
+	background: #333;	
+	color: #ccc;
+	vertical-align: bottom;
+	
+	#user_nav a {
+		text-decoration: none;
+	}
+}
+
 .user_nav_right {
 	float: right
 }
