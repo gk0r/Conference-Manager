@@ -1,0 +1,32 @@
+.form{
+  width:70%;
+  margin-left:auto;
+  margin-right:auto;
+  
+  .left {
+    float: left;
+    width:49%;
+    font-weight: bold;  
+    text-align: right;
+    // line-height:2.2em;
+  }
+  
+  .right {
+    float: right; 
+    width:49%;
+    // display: block;
+  }
+  
+  .edit_label {
+    // height: 1.5em;
+    // margin-top: 50px; 
+    line-height: 210%;
+  }
+ 
+  .edit_field {
+    // height: 1.5em;
+    margin-top: 5px; 
+  }
+  
+  // Not using 'edit_label' style at this stage
+}

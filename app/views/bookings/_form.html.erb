@@ -10,30 +10,39 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_select :date, :order => [:day, :month, :year], :start_year => Time.now.year %>
-  </div>
-  <div class="field">
-    <%= f.label :time_start %><br />
-    <%= f.time_select :time_start, :minute_step => 15, :ampm => true, :default => (Time.now + 1.hours) %>
-  </div>
-  <div class="field">
-    <%= f.label :time_finish %><br />
-    <%= f.time_select :time_finish, :minute_step => 15, :ampm => true, :default => (Time.now + 2.hours) %>
-  </div>
-  
-<!-- <%= %> button_to "Check Availability", booking_path, remote: true %> -->
+<div class="form">
+	<div class="left">
+		<%= f.label :date, :class => "edit_label" %> <br />
+		<%= f.label :time_start, :class => "edit_label" %> <br />
+		<%= f.label :time_finish, :class => "edit_label" %><br />
+		
+		<% if @ready_to_book %>
+			<%= f.label :conference_number_id, :class => "edit_label" %> <br />
+		<% end %>
+	</div>
+	
+	<div class="right">
+    	<%= f.date_select 	:date, 
+    						{:order => [:day, :month, :year], :start_year => Time.now.year}, 
+    						{:class => "edit_field"} %> <br />
+    	<%= f.time_select 	:time_start, 
+    						{:minute_step => 15, :ampm => true,	:default => (Time.now + 1.hours)}, 
+    						{:class => "edit_field"} %> <br />
+    	<%= f.time_select	:time_finish, 
+    						{:minute_step => 15, :ampm => true, :default => (Time.now + 2.hours)}, 
+    						{:class => "edit_field"} %> <br />
 
-	<% if @ready_to_book %>
-  		<div class="field">
-   			<%= f.label :conference_number_id %><br />
-			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, :prompt => true %>
-  		</div>
-  
-		<%= add_button("Book", "add.png", "positive") %> 
-	<% else %>		
- 		<%= add_button("Check Availability", "zoom.png", "positive") %> 		
-  	<% end %>
+		<% if @ready_to_book %>
+			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, 
+			{:prompt => true}, {:class => "edit_field"} %> <br />
+			
+			<%= add_button("Book", "add.png", "positive edit_field") %> 
+		<% else %>		
+ 			<%= add_button("Check Availability", "zoom.png", "positive edit_field") %>
+		<% end %>
+					
+		<%= add_link("Cancel", "cross.png", "negative edit_field", bookings_path)%>
+	</div>
+</div>
   
 <% end %>

@@ -8,5 +8,14 @@ module ApplicationHelper
     render :file  => "./layouts/buttons"
   end  
   
+  def add_link (label, image, link_class, path)
+    @label = label
+    @image = image
+    @class = link_class
+    @path  = path
+    
+    render :file  => "./layouts/links"
+  end
+  
 end
 

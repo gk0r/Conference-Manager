@@ -1,8 +1,5 @@
 <h1>Edit Conference Number</h1>
 
-<%= render 'form' %>
+<% @action = "edit" %> 
 
-<div class="buttons">
-	<%= link_to image_tag("arrow_left.png") + "Cancel", 
-		new_conference_number_path, :class => "regular" %>
-</div>
+<%= render 'form' %>  

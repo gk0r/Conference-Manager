@@ -11,34 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :logon %><br />
-    <%= f.text_field :logon %>
+<div class="form">
+	<div class="left">
+	    <%= f.label :logon, :class => "edit_label" %> <br />
+	    <%= f.label :first_name, :class => "edit_label" %> <br />
+	    <%= f.label :last_name, :class => "edit_label" %> <br />
+	    <%= f.label :spectrum_number, :class => "edit_label" %> <br />
+	    <%= f.label :password, :class => "edit_label" %> <br />
+	    
+		<% if session[:user_id] and User.find(session[:user_id]).admin %>   		
+	    	<%= f.label :admin, :class => "edit_label" %> <br />
+		<% end %>
+	</div>
+	
+<!--     Text Fields -->
+	<div class="right">
+	    <%= f.text_field :logon, :class => "edit_field" %>  <br />
+	    <%= f.text_field :first_name, :class => "edit_field" %> <br />    
+	    <%= f.text_field :last_name, :class => "edit_field" %>  <br />
+	    <%= f.text_field :spectrum_number, :class => "edit_field" %>  <br />    
+	    <%= f.text_field :password, :class => "edit_field" %> <br />
+	 
+		<% if session[:user_id] and User.find(session[:user_id]).admin %>   		
+			<%= f.collection_select(:admin, User.select("admin").uniq, :admin, :admin, 
+			{}, {:class=>"edit_field"}) %> <br />
+		<% end %>
+	  
+	  	<%= add_button("Create User", "add.png", "positive edit_field") %>
+	  	<%= add_link("Cancel", "cross.png", "negative edit_field", users_path) %>
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :spectrum_number %><br />
-    <%= f.text_field :spectrum_number %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </div>
- 
-  <% if session[:user_id] and User.find(session[:user_id]).admin %>
-	<div class="field">
-   		<%= f.label :admin %><br />
-		<%= f.collection_select :admin, User.select("admin").uniq, :admin, :admin %>
-  	</div>
-  <% end %>
-  
-  <%= add_button("Create User", "add.png", "positive") %>
-  
 <% end %>
+</div>
