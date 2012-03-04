@@ -2,4 +2,4 @@
 
 <% @ready_to_book = true %>
 
-<%= render 'form' %>
+<%= render :partial => "form", :locals => { :button_label => "Update Booking" } %>

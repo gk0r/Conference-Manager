@@ -36,7 +36,7 @@
 			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, 
 			{:prompt => true}, {:class => "edit_field"} %> <br />
 			
-			<%= add_button("Book", "add.png", "positive edit_field") %> 
+			<%= add_button(button_label, "add.png", "positive edit_field") %> 
 		<% else %>		
  			<%= add_button("Check Availability", "zoom.png", "positive edit_field") %>
 		<% end %>
