@@ -12,3 +12,6 @@
 <br /><br /><br /><br /><br /><br /><br /><br />
 <%= debug (params)%>
 <%= debug (@conference_numbers)%>
+
+<% @var = Time.parse("10:00pm")%>
+<%= debug(@var - 1.second)%>

@@ -1,6 +1,33 @@
 <h1> Test One </h1>
 
-<div id="cart">CART DIV</div>
+<table>
+  	<tr>
+	    <th>Conference number</th>
+	    <th>User</th>
+	    <th>Date</th>
+	    <th>Start Time</th>
+	    <th>Finish Time</th>
+	</tr>
+<% @bookings.each do |booking| %>
+	<tr>
+		<td>
+    		<%= booking.conference_number.conference_number %>
+    	</td>
+	    <td>
+	    	<%= booking.user.first_name %> <%=booking.user.last_name %>
+	    </td>    
+        <td>
+	    	<%= booking.date.strftime("%d/%m/%Y") %>
+	    </td>
+	    <td>
+	    	<%= booking.time_start.strftime("%I:%M%p") %>
+	    </td>
+	    <td>
+	    	<%= booking.time_finish.strftime("%I:%M%p") %>
+	    </td>
+	</tr>	  
+<% end %>
+</table>
 
 <br />
 

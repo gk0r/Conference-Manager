@@ -122,7 +122,7 @@ class BookingsController < ApplicationController
         format.html { redirect_to bookings_url, notice: 'Booking was successfully created.' }
         # format.js
         # BookingConfirmation.booking(@booking).deliver
-      elsif @conference_numbers # Redirect back to BOOK_URL if no Conference Numbers are available at the specified time.
+      elsif !@conference_numbers # Redirect back to BOOK_URL if no Conference Numbers are available at the specified time.
         format.html { redirect_to book_url, 
           notice: 'Sorry, no Conference Numbers are available at the time you have chosen. Please choose another time.'}
       else          
@@ -134,10 +134,10 @@ class BookingsController < ApplicationController
   end
   
   def test1
-    @booking = Booking.find("1")
+    @bookings = Booking.all
  
     respond_to do |format|
-      format.html { render action: "test1" }
+      format.html
       format.js      
     end
   end
@@ -163,10 +163,10 @@ class BookingsController < ApplicationController
             OR (bookings.time_finish BETWEEN ? AND ?)
           )", 
       @booking.date, 
-      @booking.time_start, 
-      @booking.time_finish, 
-      @booking.time_start, 
-      @booking.time_finish])
+      @booking.time_start + 1.second, 
+      @booking.time_finish - 1.second, 
+      @booking.time_start + 1.second, 
+      @booking.time_finish - 1.second])
   end
   
   # This helper method parses the Booking Object from the various forms.
@@ -198,5 +198,24 @@ class BookingsController < ApplicationController
       end  
   end
   
+  def find_available_conference_numbers
+      @available_conference_times = ConferenceNumber.find_by_sql(
+      ["SELECT id, conference_number 
+        FROM conference_numbers 
+        WHERE id NOT IN 
+          (SELECT conference_numbers.id 
+            FROM conference_numbers 
+            INNER JOIN bookings 
+            ON conference_numbers.id=bookings.conference_number_id 
+            WHERE bookings.date == ? 
+            AND (bookings.time_start BETWEEN ? AND ?) 
+            OR (bookings.time_finish BETWEEN ? AND ?)
+          )", 
+      @booking.date, 
+      @booking.time_start + 1.second, 
+      @booking.time_finish - 1.second, 
+      @booking.time_start + 1.second, 
+      @booking.time_finish - 1.second])
+  end
   
 end
