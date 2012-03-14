@@ -22,15 +22,11 @@
 	</div>
 	
 	<div class="right">
-    	<%= f.date_select 	:date, 
-    						{:order => [:day, :month, :year], :start_year => Time.now.year}, 
-    						{:class => "edit_field"} %> <br />
-    	<%= f.time_select 	:time_start, 
-    						{:minute_step => 15, :ampm => true,	:default => (Time.now + 1.hours)}, 
-    						{:class => "edit_field"} %> <br />
-    	<%= f.time_select	:time_finish, 
-    						{:minute_step => 15, :ampm => true, :default => (Time.now + 2.hours)}, 
-    						{:class => "edit_field"} %> <br />
+		<%= text_field_tag :date, params[:date], :size => 25, :class => "edit_field" %> <br />
+    						
+    	<%= text_field_tag :time_start, params[:time_start], :size => 10, :class => "edit_field" %> <br />
+							
+    	<%= text_field_tag :time_finish, params[:time_finish], :size => 10, :class => "edit_field" %> <br /> 
 
 		<% if @ready_to_book %>
 			<%= f.collection_select :conference_number_id, @conference_numbers, :id, :conference_number, 
@@ -46,3 +42,8 @@
 </div>
   
 <% end %>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<%= debug(@booking) %>
+<%= debug(params) %>

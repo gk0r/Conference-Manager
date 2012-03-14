@@ -1,0 +1,14 @@
+<h1>Rendering Check Action</h1>
+
+<%= form_tag do %>	
+<%= render :partial => "booking_form_open", :locals => {:disabled => false} %>
+
+<%= add_button("Check Availability", "zoom.png", "positive edit_field") %>
+<%= add_link("Cancel", "cross.png", "negative edit_field", bookings_path)%>
+
+<%= render :partial => "booking_form_close" %>
+
+<% end %>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<%= debug (params)%>
+<%= debug (@conference_numbers)%>

@@ -1,29 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Logon:</b>
-  <%= @user.logon %>
-</p>
-
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Spectrum number:</b>
-  <%= @user.spectrum_number %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
-
-<%= link_to 'Update My Profile', edit_user_path(@user) %>
-
+<div class="form">
+	<div class="left">
+		<label class="edit_label">Logon:</label> <br />
+		<label class="edit_label">First Name:</label> <br />
+		<label class="edit_label">Last Name:</label> <br />
+		<label class="edit_label">Spectrum Number:</label> <br />
+	</div>	
+	
+	<div class="right">			
+  		<label class="edit_field"><%= @user.logon %></label> <br />
+	  	<label class="edit_field"><%= @user.first_name %></label> <br />
+		<label class="edit_field"><%= @user.last_name %></label> <br />
+		<label class="edit_field"><%= @user.spectrum_number %></label> <br />
+  		
+		<%= add_link("Update My Profile", "textfield_rename.png", "regular edit_field", 
+		edit_user_path(@user)) %>
+	</div>
+</div>

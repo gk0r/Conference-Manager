@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore my Environment Settings (such as my SMTP Server Configuration)
+config/environments/*.*

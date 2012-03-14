@@ -41,4 +41,4 @@ gem 'jquery-rails'
 
 gem 'will_paginate', '~> 3.0'
 
-
+gem "combined_time_select", "~> 0.0.1"

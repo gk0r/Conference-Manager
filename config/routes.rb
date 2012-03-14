@@ -1,11 +1,11 @@
 ConferenceManager::Application.routes.draw do
   get 'admin' => "bookings#index"
 
-  get  'check_availability' => "bookings#check_availability"
-  post 'check_availability' => "bookings#check_availability"
+  # get  'check' => "bookings#check" # Replacing a single BOOK route for both check and book actions
+  # post 'check' => "bookings#check"
   
-  get  'book' => "bookings#book"
-  post 'book' => "bookings#book"
+  get  'book' => "bookings#check"
+  post 'book' => "bookings#check"
   
   get "test1"   => "bookings#test1"
   get "test2"   => "bookings#test2"
@@ -20,14 +20,7 @@ ConferenceManager::Application.routes.draw do
     get     'logout'  => :destroy # To enable the Logout link    
     delete  'logout'  => :destroy # Not sure what this does...
   end
-  
-  # controller :bookings do
-    # get     'bookings/test'    => :test
-    # post    'bookings/test'    => :test
-#     
-    # post    'bookings/new'     => :create
-  # end
-  
+ 
   resources :bookings
 
   resources :conference_numbers

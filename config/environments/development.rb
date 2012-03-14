@@ -34,4 +34,20 @@ ConferenceManager::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # Mailer Setup
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  
+  config.action_mailer.raise_delivery_errors = false # Change this value if you wish to actively test e-mail delivery in dev
+  
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,    
+    authentication: "plain",
+    user_name: "email.here@gmail.com",
+    password: "password.here",
+    enable_starttls_auto: true
+  }
+
 end

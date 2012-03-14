@@ -37,10 +37,15 @@ class BookingsController < ApplicationController
   end
 
   # POST /bookings
-  def create
-    @booking = Booking.new(params[:booking])
-    @booking.user_id = session[:user_id]
+  def create  
+    @booking = Booking.new(params[:booking])    
     
+    # Populate the object
+    @booking.user_id = session[:user_id] # This is to prevent the object from saving
+    @booking.date = Date.parse(params[:date])
+    @booking.time_start = Time.parse("#{@booking.date} #{Time.parse(params[:time_start])}")
+    @booking.time_finish = Time.parse("#{@booking.date} #{Time.parse(params[:time_finish])}")
+        
     get_available_conference_numbers()
   
     respond_to do |format|
@@ -49,9 +54,10 @@ class BookingsController < ApplicationController
         format.html { render action: "new" }
       else 
       
-        if @booking.save
+        if @booking.save          
           format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-          format.js        
+          format.js
+          BookingConfirmation.booking(@booking).deliver        
         else
           @ready_to_book = true # This will allow me to separate the 'first' and the 'second' pass
           format.html { render action: "new" }
@@ -86,58 +92,45 @@ class BookingsController < ApplicationController
   end
   
   # This action will check availability of a conference number for a particular time.   
-  def check_availability
+  def check
     @booking = Booking.new
     
-    @booking.conference_number_id = params[:conference_number_id]
-    @booking.user_id              = params[:user_id]
-    @booking.date                 = params[:date]
-    @booking.time_start           = params[:time_start]
-    @booking.time_finish          = params[:time_finish]
-        
+    parse_booking()    
+       
     if @booking.user_id and @booking.date and @booking.time_start and @booking.time_finish 
-      redirect_to :action       => "book", 
-                  :user_id      => params[:user_id], 
-                  :date         => params[:date], 
-                  :time_start   => params[:time_start], 
-                  :time_finish  => params[:time_finish]
+      book(@booking)
     else
       respond_to do |format|
-        format.html { render action: "check_availability" }
+        format.html { render action: "check" }
       end
     end    
   end
   
-  def book
-    @booking = Booking.new
+  def book (booking)
+    @booking = booking    
+  
+    get_available_conference_numbers
     
-    @booking.conference_number_id = params[:conference_number_id]
-    @booking.user_id              = params[:user_id]
-    @booking.date                 = params[:date]
-    @booking.time_start           = params[:time_start]
-    @booking.time_finish          = params[:time_finish]
+    # respond_to do |format|
+     # format.html { render action: "book" }
+    # end
     
-    @conference_numbers = ConferenceNumber.find_by_sql(
-      ["SELECT id, conference_number 
-        FROM conference_numbers 
-        WHERE id NOT IN 
-          (SELECT conference_numbers.id 
-            FROM conference_numbers 
-            INNER JOIN bookings 
-            ON conference_numbers.id=bookings.conference_number_id 
-            WHERE bookings.date == ? 
-            AND (bookings.time_start BETWEEN ? AND ?) 
-            OR (bookings.time_finish BETWEEN ? AND ?)
-          )", 
-      @booking.date, 
-      @booking.time_start, 
-      @booking.time_finish, 
-      @booking.time_start, 
-      @booking.time_finish])
+    #--------------------
     
     respond_to do |format|
-      format.html { render action: "book" }
+      if @booking.save          
+        format.html { redirect_to bookings_url, notice: 'Booking was successfully created.' }
+        # format.js
+        # BookingConfirmation.booking(@booking).deliver
+      elsif @conference_numbers # Redirect back to BOOK_URL if no Conference Numbers are available at the specified time.
+        format.html { redirect_to book_url, 
+          notice: 'Sorry, no Conference Numbers are available at the time you have chosen. Please choose another time.'}
+      else          
+        format.html { render action: "book" }
+        # format.js
+      end
     end
+    
   end
   
   def test1
@@ -155,8 +148,55 @@ class BookingsController < ApplicationController
     end    
   end
   
+  # This helper method retrieves available conference numbers
   def get_available_conference_numbers()
-    @conference_numbers = ConferenceNumber.find_by_sql(["SELECT id, conference_number FROM conference_numbers WHERE id NOT IN (SELECT conference_numbers.id FROM conference_numbers INNER JOIN bookings ON conference_numbers.id=bookings.conference_number_id WHERE bookings.date == ? AND (bookings.time_start BETWEEN ? AND ?) OR (bookings.time_finish BETWEEN ? AND ?))", @booking.date, @booking.time_start, @booking.time_finish, @booking.time_start, @booking.time_finish])
+    @conference_numbers = ConferenceNumber.find_by_sql(
+      ["SELECT id, conference_number 
+        FROM conference_numbers 
+        WHERE id NOT IN 
+          (SELECT conference_numbers.id 
+            FROM conference_numbers 
+            INNER JOIN bookings 
+            ON conference_numbers.id=bookings.conference_number_id 
+            WHERE bookings.date == ? 
+            AND (bookings.time_start BETWEEN ? AND ?) 
+            OR (bookings.time_finish BETWEEN ? AND ?)
+          )", 
+      @booking.date, 
+      @booking.time_start, 
+      @booking.time_finish, 
+      @booking.time_start, 
+      @booking.time_finish])
   end
+  
+  # This helper method parses the Booking Object from the various forms.
+  def parse_booking ()
+      @booking.user_id = session[:user_id] 
+      
+      begin 
+        @booking.date = Date.parse(params[:date])
+      rescue
+        @booking.date = nil
+      end
+      
+      begin 
+        @booking.time_start = Time.parse("#{@booking.date} #{Time.parse(params[:time_start])}")
+      rescue
+        @booking.time_start = nil
+      end
+          
+      begin 
+        @booking.time_finish = Time.parse("#{@booking.date} #{Time.parse(params[:time_finish])}")
+      rescue
+        @booking.time_finish = nil
+      end
+      
+      begin 
+        @booking.conference_number_id = params[:conference_number_id]
+      rescue
+        @booking.conference_number_id = nil
+      end  
+  end
+  
   
 end

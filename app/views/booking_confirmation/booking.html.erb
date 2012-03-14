@@ -1,0 +1,19 @@
+<html>
+	<h3>Conference Manager</h3>
+	
+	<p>
+ 		Hi <%= @booking.user.first_name %>,	
+	</p>
+	<p>
+		You have successfully booked
+		<b><%= @booking.conference_number.conference_number %></b> for 
+		<b><%= @booking.date.strftime("%A %d %B %Y") %></b> from 
+		<b><%= @booking.time_start.strftime("%I:%M%p") %></b> until 
+		<b><%= @booking.time_finish.strftime("%I:%M%p") %></b>.
+	</p>
+	<p>
+		Please cancel your booking if you will no longer require this
+		Dial-In number.
+	</p>
+	
+</html>

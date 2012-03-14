@@ -1,0 +1,19 @@
+<div class="form">
+	<div class="left">
+		<%= label_tag :date, 'Date:', :class => "edit_label" %> <br />
+        <%= label_tag :time_start, 'Time Start:', :class => "edit_label" %> <br />
+        <%= label_tag :time_finish, 'Time Finish:', :class => "edit_label" %> <br />
+		
+		<% if disabled %>
+			<%= label_tag :conference_number_id, 'Conference Number:', :class => "edit_label" %> <br />
+		<% end %>
+    </div>
+	<div class="right">		
+        <%= text_field_tag :date, params[:date], :size => 25, :disabled => disabled, :class => "edit_field" %> <br />
+    	<%= text_field_tag :time_start, params[:time_start], :size => 10, :disabled => disabled, :class => "edit_field" %> <br />
+    	<%= text_field_tag :time_finish, params[:time_finish], :size => 10, :disabled => disabled, :class => "edit_field" %> <br />
+
+		<% 	# This is where buttons and links go.
+			# These are rendered in the main actions
+			# These DIVs are closed with the _booking_form_close partial. 
+		%>

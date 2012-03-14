@@ -1,28 +1,21 @@
-<%= debug (@booking) %>
+<h1>Rendering Book Action</h1>
 
-<%= form_tag do %>
-    <fieldset>
-      <legend>Shell for the Booking Object</legend>
+<%= form_tag do %>	
+	<%= render :partial => "booking_form_open", :locals => {:disabled => true} %>
+	
+		<%= select_tag "conference_number_id", 
+		         options_from_collection_for_select(@conference_numbers, :id, :conference_number), :class => "edit_field" %> <br />
+		
+		<%= add_button("Book", "add.png", "positive edit_field") %>
+		<%= add_link("Cancel", "cross.png", "negative edit_field", bookings_path)%>
+	
+		<%= link_to "Test", book_path(@booking.attributes)  %>
+		
+	<%= render :partial => "booking_form_close" %>
 
-        <%= label_tag :user_id, 'User ID:' %>
-        <%= text_field_tag :user_id, (params[:user_id] or "1") %> <br />
-      
-        <%= label_tag :date, 'Date:' %>
-        <%= text_field_tag :date, (params[:end] or Date.today) %> <br />
-      
-        <%= label_tag :time_start, 'Time Start:' %>
-        <%= text_field_tag :time_start, (params[:time_start] or Time.now + 1.hours) %> <br />
-        
-        <%= label_tag :time_finish, 'Time Finish:' %>
-        <%= text_field_tag :time_finish, (params[:time_finish] or Time.now + 2.hours) %> <br />
-        
-        <%= label_tag :conference_number_id %><br />
-        <%= select_tag "conference_number_id", 
-         options_from_collection_for_select(@conference_numbers, :id, :conference_number) 
-        %>
+<% end %> 
 
-        <%= submit_tag "Test !" %>
-    
-    </fieldset>
-<% end %>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<%= debug(@booking.attributes)%>
+<%= debug (@conference_numbers)%>
 
