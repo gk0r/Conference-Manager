@@ -7,11 +7,7 @@ ConferenceManager::Application.routes.draw do
   get  'book' => "bookings#check"
   post 'book' => "bookings#check"
   
-  get "test1"   => "bookings#test1"
-  get "test2"   => "bookings#test2"
-  
-  post "test1"   => "bookings#test1"
-  post "test2"   => "bookings#test2"
+  get 'bookings/new' => "bookings#check"
 
   
   controller :sessions do

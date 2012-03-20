@@ -1,6 +1,6 @@
 class BookingConfirmation < ActionMailer::Base
   default from: "Conference Manager from@example.com"
-2
+
   def booking (booking)
       @booking = booking
 

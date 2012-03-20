@@ -45,8 +45,8 @@ ConferenceManager::Application.configure do
     address: "smtp.gmail.com",
     port: 587,    
     authentication: "plain",
-    user_name: "email.here@gmail.com",
-    password: "password.here",
+    user_name: "email@gmail.com",
+    password: "password",
     enable_starttls_auto: true
   }
 

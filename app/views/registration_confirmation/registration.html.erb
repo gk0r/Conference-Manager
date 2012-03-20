@@ -1,0 +1,18 @@
+<html>
+	<h3>Conference Manager</h3>
+	
+	<p>
+ 		Hi Admin,	
+	</p>
+	<p>
+		<%= @user.first_name %> <%= @user.last_name %> has registered with Conference Manager.
+		You can view <%= @user.first_name %>'s details
+		<%= link_to("here.", edit_user_path(@user)) %>
+	</p>
+	<p>
+		This email is sent to you because you are an administrator of
+		Conference Manager. If you no longer wish to be responsible, 
+		please update your profile.				
+	</p>
+	
+</html>

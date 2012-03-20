@@ -55,6 +55,7 @@ class UsersController < ApplicationController
         if session[:user_id] == nil
           session[:user_id] = @user.id
         end
+        RegistrationConfirmation.registration(@user).deliver
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

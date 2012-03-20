@@ -4,11 +4,10 @@
 	<!-- Navigation Logged-In -->
 
 <!-- 		Navigation Left -->
-		<ul class="nav_left">
-			<li> <%= link_to "New Booking", :controller => :bookings, :action => :new %> </li>
+		<ul class="nav_left">			
+			<li> <%= link_to "New Booking", :controller => :bookings, :action => :check  %> </li>
 			<li> <%= link_to "View Bookings", bookings_path %></li>				
-			<li> <%= link_to "Conference Numbers", conference_numbers_path %> </li>
-			<li> <%= link_to "[New Booking]", :controller => :bookings, :action => :check  %> </li>
+			<li> <%= link_to "Conference Numbers", conference_numbers_path %> </li>			
 		</ul>
 		
 <!-- 		Navigation Right -->

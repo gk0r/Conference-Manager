@@ -11,7 +11,6 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
     <th>Start Time</th>
     <th>Finish Time</th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @bookings.each do |booking| %>
@@ -32,12 +31,7 @@ Time formatting: http://www.ruby-doc.org/core-1.9.3/Time.html#M000297 -->
     <td>
     	<%= booking.time_finish.strftime("%I:%M%p") %>
     </td>
-    
-    <td> <div class="buttons">	
-    	<%= link_to image_tag("textfield_rename.png", :alt => "Edit") + "Edit",  
-    		edit_booking_path(booking), :class => "regular" %>
-    </td> </div> 
-    		
+  		
     <td> <div class="buttons">	
     	<%= link_to image_tag("cross.png", :alt => "Delete") + "Delete", 
     		booking, :class => "negative",
