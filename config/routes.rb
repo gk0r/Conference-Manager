@@ -8,7 +8,6 @@ ConferenceManager::Application.routes.draw do
   post 'book' => "bookings#check"
   
   get 'bookings/new' => "bookings#check"
-
   
   controller :sessions do
     get     'login'   => :new
